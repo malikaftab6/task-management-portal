@@ -1,0 +1,209 @@
+.task-list h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.task-list h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.task-filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.compact-filters .filter-item {
+  flex: 1;
+  max-width: 350px; /* Set a max-width for filter items */
+}
+
+@media screen and (max-width: 768px) {
+  .compact-filters .filter-item {
+    flex: 1 1 100%;
+    width: 100%; /* Make filters take full width on smaller screens */
+    max-width: 100%;
+  }
+}
+
+.list-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 30px;
+}
+
+table {
+  width: 100%;
+  background: #f6f4f4;
+  padding: 10px;
+  border-collapse: collapse;
+}
+
+.mat-header-row {
+  background: #f6f4f4;
+}
+
+.mat-row td,
+.mat-header-row th {
+  text-align: left;
+  padding: 10px;
+  word-wrap: break-word; /* Allow long text to break into a new line */
+}
+
+.mat-row td {
+  border-bottom: 1px solid lightgray;
+}
+
+.mat-icon-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+}
+
+.example-form-field {
+  width: 200px;
+}
+
+@media screen and (max-width: 768px) {
+  .task-filters {
+    flex-direction: column; /* Stack filters vertically on smaller screens */
+    gap: 10px;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto; /* Add horizontal scrolling for smaller screens */
+    white-space: nowrap; /* Prevent table cells from wrapping */
+  }
+
+  .mat-header-row, .mat-row {
+    display: table-row;
+  }
+
+  .mat-header-cell, .mat-cell {
+    padding: 10px;
+    text-align: left;
+    word-wrap: break-word;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .task-list h1 {
+    font-size: 1.5rem;
+  }
+
+  .mat-icon-button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .example-form-field {
+    width: 100%;
+  }
+}
+
+.drag-drop-heading {
+  border-radius: 3px;
+  padding: 10px 0px;
+  margin-top: 1.5rem;
+  text-align: start;
+}
+
+.drag-drop-heading h3 {
+  font-size: 1.5rem; /* Large and bold for a clear section title */
+  color: #000; /* Darker shade for better readability */
+  margin-bottom: 10px; /* Space below the heading */
+}
+
+.drag-drop-heading p {
+  font-size: 0.8rem; /* Standard readable size */
+  font-weight: 400; /* Lighter weight for descriptive text */
+  color: #607d8b; /* Softer color for supporting text */
+  line-height: 1.6; /* Improved readability with proper spacing */
+  margin-bottom: 0rem;
+}
+
+.drag-drop-heading p strong {
+  font-weight: 600; /* Slightly bolder for emphasis */
+  color: #37474f; /* Match heading color for consistency */
+}
+
+
+
+.task-board {
+  margin: 1rem 0rem;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.task-column {
+  flex: 1;
+  padding: 10px;
+  background: #f6f6f6;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.task-column h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.task-list {
+  min-height: 300px;
+  background: #fff;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task-card {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #f9f9f9;
+  cursor: grab;
+}
+
+.task-card-header {
+  font-weight: bold;
+}
+
+.task-card-body {
+  margin-top: 5px;
+}
+
+.task-card-meta {
+  font-size: 12px;
+  color: gray;
+}
+
+.task-card-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 5px;
+}
+
+.cdk-drag-preview {
+  background: #e0e0e0;
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+@media screen and (max-width: 768px) {
+  .task-board {
+    gap:10px;
+    flex-direction: column;
+  }
+  
+}

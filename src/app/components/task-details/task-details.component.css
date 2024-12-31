@@ -1,0 +1,108 @@
+.task-details-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.task-details-card {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.task-details-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Align top for multi-line text */
+  font-size: 16px;
+  padding: 5px 0;
+  word-wrap: break-word; /* Wrap long text */
+  word-break: break-word;
+}
+
+.detail-row strong {
+  flex: 0 0 40%; /* Fixed width for labels */
+  text-align: left;
+}
+
+mat-card-header {
+  justify-content: center;
+}
+
+mat-card-title,
+mat-card-subtitle {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+
+mat-chip {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Add responsive design */
+@media (max-width: 600px) {
+  .task-details-card {
+    padding: 10px;
+    max-width: 100%;
+  }
+
+  .detail-row {
+    flex-direction: column; /* Stack labels and values */
+    align-items: flex-start;
+  }
+
+  .detail-row strong {
+    margin-bottom: 5px;
+  }
+
+  .detail-row span {
+    word-break: break-word; /* Wrap long text */
+  }
+
+  mat-card-actions {
+    flex-direction: column; /* Stack buttons vertically */
+  }
+}
+
+.detail-row span {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Show 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chip-warn {
+  background-color: #ffcc00 !important; /* Yellow */
+  color: #fff !important;
+}
+
+.chip-accent {
+  background-color: #97c1f0 !important; /* Blue */
+  color: #fff !important;
+}
+
+.chip-primary {
+  background-color: #4caf50 !important; /* Green */
+  color: #fff !important;
+}
+
+.chip-default {
+  background-color: #e0e0e0 !important; /* Grey */
+  color: #000 !important;
+}

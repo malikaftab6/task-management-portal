@@ -1,0 +1,45 @@
+/* Global styles with responsiveness */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.task-list {
+  padding: 20px;
+  margin: 0 auto;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+table {
+  margin-top: 20px;
+}
+
+th {
+  font-weight: bold;
+}
+
+
+/* Ensure no interference with Angular Material styles */
+.mat-form-field, .mat-select, .mat-input-element {
+  font-family: inherit;
+}
+
+
+
+mat-form-field {
+  flex: 1; /* Ensure equal width for all filters */
+  min-width: 150px; /* Minimum width to prevent overlap */
+}
+
+.mat-form-field-wrapper {
+  margin: 0; /* Remove additional margin around form fields */
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,0 +1,207 @@
+<div class="task-list">
+  <div class="list-title">
+    <h2>Task List</h2>
+  </div>
+  <!-- Filters Section -->
+  <div class="task-filters compact-filters">
+    <div class="filter-item">
+      <mat-form-field appearance="outline">
+        <mat-label>Search tasks</mat-label>
+        <input
+          matInput
+          placeholder="Enter task name or description"
+          [(ngModel)]="searchTerm"
+          (ngModelChange)="applyFilters()"
+        />
+        <button
+          *ngIf="searchTerm"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="clearSearch()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <div class="filter-item">
+      <mat-form-field appearance="outline">
+        <mat-label>Priority</mat-label>
+        <mat-select
+          [(ngModel)]="filters.priority"
+          (selectionChange)="applyFilters()"
+        >
+          <mat-option value="">All</mat-option>
+          <mat-option *ngFor="let priority of priorities" [value]="priority">{{
+            priority
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="filter-item">
+      <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select
+          [(ngModel)]="filters.status"
+          (selectionChange)="applyFilters()"
+        >
+          <mat-option value="">All</mat-option>
+          <mat-option *ngFor="let status of statuses" [value]="status">{{
+            status
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+      <!-- Add Task Button -->
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="addTask()"
+        style="margin-bottom: 20px"
+      >
+        Add Task
+      </button>
+  </div>
+
+  <!-- Task Table -->
+  <div class="example-container mat-elevation-z1">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="responsive-md responsive-sm zebra sticky-header"
+    >
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let task">{{ task.name }}</td>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let task">{{ task.description }}</td>
+      </ng-container>
+      <ng-container matColumnDef="priority">
+        <th mat-header-cell *matHeaderCellDef>Priority</th>
+        <td mat-cell *matCellDef="let task">{{ task.priority }}</td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let task">{{ task.status }}</td>
+      </ng-container>
+      <ng-container matColumnDef="assigned">
+        <th mat-header-cell *matHeaderCellDef>Assigned To</th>
+        <td mat-cell *matCellDef="let task">{{ task.assignedTo }}</td>
+      </ng-container>
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Due Date</th>
+        <td mat-cell *matCellDef="let task">{{ task.dueDate | date }}</td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let task">
+          <button mat-icon-button color="primary" (click)="viewTask(task.id)">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button mat-icon-button color="accent" (click)="editTask(task.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteTask(task.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+
+  <!-- Section Heading -->
+<div class="drag-drop-heading">
+  <div class="drag-drop-heading-content">
+    <h3>Manage Task Status</h3>
+    <p>
+      Easily update the status of tasks by dragging and dropping them between the columns below. Move tasks between 
+      <strong>Pending</strong>, <strong>In Progress</strong>, and <strong>Completed</strong> to keep everything organized.
+    </p>
+  </div>
+</div>
+
+  <!-- Task Status Columns with Drag-and-Drop -->
+  <div cdkDropListGroup>
+    <div class="task-board">
+      <!-- Pending Column -->
+      <div class="task-column">
+        <h3>Pending</h3>
+        <div
+          cdkDropList
+          [cdkDropListData]="pendingTasks"
+          class="task-list"
+          (cdkDropListDropped)="onDrop($event, 'Pending')"
+        >
+          <div *ngFor="let task of pendingTasks" cdkDrag class="task-card">
+            <div class="task-card-header">
+              <strong>{{ task.name }}</strong>
+            </div>
+            <div class="task-card-body">
+              <span>{{ task.description }}</span>
+              <div class="task-card-meta">
+                <span>Priority: {{ task.priority }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- In Progress Column -->
+      <div class="task-column">
+        <h3>In Progress</h3>
+        <div
+          cdkDropList
+          [cdkDropListData]="inProgressTasks"
+          class="task-list"
+          (cdkDropListDropped)="onDrop($event, 'In Progress')"
+        >
+          <div *ngFor="let task of inProgressTasks" cdkDrag class="task-card">
+            <div class="task-card-header">
+              <strong>{{ task.name }}</strong>
+            </div>
+            <div class="task-card-body">
+              <span>{{ task.description }}</span>
+              <div class="task-card-meta">
+                <span>Priority: {{ task.priority }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Completed Column -->
+      <div class="task-column">
+        <h3>Completed</h3>
+        <div
+          cdkDropList
+          [cdkDropListData]="completedTasks"
+          class="task-list"
+          (cdkDropListDropped)="onDrop($event, 'Completed')"
+        >
+          <div *ngFor="let task of completedTasks" cdkDrag class="task-card">
+            <div class="task-card-header">
+              <strong>{{ task.name }}</strong>
+            </div>
+            <div class="task-card-body">
+              <span>{{ task.description }}</span>
+              <div class="task-card-meta">
+                <span>Priority: {{ task.priority }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

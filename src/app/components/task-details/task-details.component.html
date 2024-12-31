@@ -1,0 +1,40 @@
+<div class="task-details-wrapper">
+  <mat-card class="task-details-card mat-elevation-z8">
+    <mat-card-header>
+      <mat-card-title>Task Details</mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content *ngIf="(task$ | async) as task">
+      <div class="task-details-content">
+        <div class="detail-row">
+          <strong>Name:</strong>
+          <span>{{ task.name }}</span>
+        </div>
+        <div class="detail-row">
+          <strong>Description:</strong>
+          <span>{{ task.description }}</span>
+        </div>
+        <div class="detail-row">
+          <strong>Priority:</strong>
+          <mat-chip color="primary">{{ task.priority }}</mat-chip>
+        </div>
+        <div class="detail-row">
+          <strong>Status:</strong>
+          <mat-chip [ngClass]="getStatusClass(task.status)">{{ task.status }}</mat-chip>
+        </div>
+        <div class="detail-row">
+          <strong>Assigned To:</strong>
+          <span>{{ task.assignedTo }}</span>
+        </div>
+        <div class="detail-row">
+          <strong>Due Date:</strong>
+          <span>{{ task.dueDate | date: 'mediumDate' }}</span>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="goBack()">Back to Task List</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
